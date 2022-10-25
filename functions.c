@@ -6,7 +6,7 @@
 /*   By: papereir <papereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:36:23 by papereir          #+#    #+#             */
-/*   Updated: 2022/10/18 19:54:50 by papereir         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:59:58 by papereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	ft_putstr(char *s)
 	int	i;
 
 	i = 0;
-	if (s != NULL)
+	if (!s) {
+		return (ft_putstr("(null)"));
+	}
 	{
 		while (s[i] != '\0')
 		{
@@ -28,17 +30,18 @@ int	ft_putstr(char *s)
 	return (i);
 }
 
-int	ft_putchar(char c)
+int	ft_putchar(int c)
 {
 	write (1, &c, 1);
 	return (1);
 }
 
-int	ft_puthexa(unsigned long int n)
+int	ft_puthexa(unsigned long n)
 {
-	char	*b;
-	int		size;
+	char		*b;
+	static int	size;
 
+	size = 0;
 	b = "0123456789abcdef";
 	if (n >= 16) {
 		ft_puthexa(n / 16);
@@ -49,9 +52,21 @@ int	ft_puthexa(unsigned long int n)
 	return (size);
 }
 
+int	ft_putadd(void	*n)
+{
+	int		i;
+	size_t	aux;
+
+	i = 0;
+	aux = (size_t)n;
+	i = write(1, "0x", 2);
+	i = i + ft_puthexa(aux);
+	return (i);
+}
+
 int	ft_putnbr(int n)
 {
-	int			i;
+	static int	i;
 	long		num;
 	
 	num = n;
