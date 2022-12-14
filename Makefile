@@ -6,11 +6,11 @@
 #    By: papereir <papereir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 13:38:45 by papereir          #+#    #+#              #
-#    Updated: 2022/10/25 17:40:35 by papereir         ###   ########.fr        #
+#    Updated: 2022/12/14 18:20:26 by papereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = ft_printf.c functions.c
+SRCS    = ft_printf.c functions.c functions2.c
 OBJS    = ${SRCS:.c=.o}
 OBJB    = ${SRCSB:.c=.o}
 NAME    = libftprintf.a

@@ -6,41 +6,39 @@
 /*   By: papereir <papereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 16:50:18 by papereir          #+#    #+#             */
-/*   Updated: 2022/10/25 20:06:06 by papereir         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:17:33 by papereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-	int	ft_percentage(va_list print, char s)
+int	ft_percentage(va_list print, char s)
 {
 	int	size;
 
 	size = 0;
-	if (s == '%') {
+	if (s == '%')
 		size += ft_putchar('%');
-	} else if (s == 'c') {
+	else if (s == 'c')
 		size += ft_putchar(va_arg(print, int));
-	} else if (s == 's') {
+	else if (s == 's')
 		size += ft_putstr(va_arg(print, char *));
-	} else if (s == 'p') {
+	else if (s == 'p')
 		size += ft_putadd(va_arg(print, void *));
-	} else if (s == 'i') {
+	else if (s == 'i')
 		size += ft_putnbr(va_arg(print, int));
-	} else if (s == 'd') {
+	else if (s == 'd')
 		size += ft_putnbr(va_arg(print, int));
-	}
-	/* else if (s == 'u') {
-		size += ft_putdec(va_arg(print, int));
-	} else if (s == 'x') {
-		size += ft_puthexamin(va_arg(print, int));
-	} else if (s == 'X') {
-		size += ft_puthexamax(va_arg(print, int));
-	}*/
+	else if (s == 'u')
+		size += ft_putnbase(va_arg(print, int), "0123456789");
+	else if (s == 'x')
+		size += ft_putnbase(va_arg(print, int), "0123456789abcdef");
+	else if (s == 'X')
+		size += ft_putnbase(va_arg(print, int), "0123456789ABCDEF");
 	return (size);
 }
 
-int	ft_printf(char const *s , ...)
+int	ft_printf(char const *s, ...)
 {
 	int		i;
 	int		size;
@@ -49,21 +47,46 @@ int	ft_printf(char const *s , ...)
 	i = 0;
 	size = 0;
 	va_start(print, s);
-	while (s[i]) {
-		if (s[i] == '%') {
-			size += ft_percentage(print, s[i+1]);
+	while (s[i])
+	{
+		if (s[i] == '%')
+		{
+			size += ft_percentage(print, s[i + 1]);
 			i++;
-		} else {
-			size += ft_putchar(s[i]);	
 		}
+		else
+			size += ft_putchar(s[i]);
 		i++;
 	}
 	va_end(print);
 	return (size);
 }
 
-int	main(void) {
-	int n = -2147483647;
-	ft_printf("%p", n);
-	return (0);
+size_t	ft_strlen(const char *str)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+int	ft_puthexa(unsigned long int nbr)
+{
+	char		*base;
+	static int	i;
+
+	i = 0;
+	base = "0123456789abcdef";
+	if (nbr >= 16)
+	{
+		ft_puthexa(nbr / 16);
+		nbr = nbr % 16;
+	}
+	i++;
+	ft_putchar(base[nbr]);
+	return (i);
 }

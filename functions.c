@@ -6,7 +6,7 @@
 /*   By: papereir <papereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:36:23 by papereir          #+#    #+#             */
-/*   Updated: 2022/10/25 19:59:58 by papereir         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:10:30 by papereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ int	ft_putstr(char *s)
 	int	i;
 
 	i = 0;
-	if (!s) {
+	if (!s)
 		return (ft_putstr("(null)"));
-	}
+	while (s[i] != '\0')
 	{
-		while (s[i] != '\0')
-		{
-			write(1, &s[i], 1);
-			i++;
-		}
+		write(1, &s[i], 1);
+		i++;
 	}
 	return (i);
 }
@@ -36,20 +33,21 @@ int	ft_putchar(int c)
 	return (1);
 }
 
-int	ft_puthexa(unsigned long n)
+int	ft_putnbase(unsigned int number, char *base)
 {
-	char		*b;
-	static int	size;
+	static int	i;
+	size_t		numero;
 
-	size = 0;
-	b = "0123456789abcdef";
-	if (n >= 16) {
-		ft_puthexa(n / 16);
-		n = n % 16;
+	numero = (size_t)number;
+	i = 0;
+	if (numero >= ft_strlen(base))
+	{
+		ft_putnbase(numero / ft_strlen(base), base);
+		numero = numero % ft_strlen(base);
 	}
-	size++;
-	ft_putchar(b[n]);
-	return (size);
+	i++;
+	ft_putchar(base[numero]);
+	return (i);
 }
 
 int	ft_putadd(void	*n)
@@ -68,21 +66,27 @@ int	ft_putnbr(int n)
 {
 	static int	i;
 	long		num;
-	
+
 	num = n;
 	i = 0;
-	if (num < 0) {
+	if (num < 0)
+	{
 		ft_putchar('-');
-		num %= -1;
+		num *= -1;
 	}
-	if (num > 9) {
+	if (num > 9)
+	{
 		ft_putnbr(num / 10);
 		num %= 10;
 	}
 	i++;
 	ft_putchar(num + '0');
-	if (n < 0) {
+	if (n < 0)
 		i++;
-	}
 	return (i);
 }
+/*
+int main(void) {
+	ft_printf(" % % ");
+	printf(" % % ");
+}*/
