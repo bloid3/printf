@@ -6,7 +6,7 @@
 /*   By: papereir <papereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 16:50:18 by papereir          #+#    #+#             */
-/*   Updated: 2022/10/25 19:58:08 by papereir         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:06:06 by papereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	ft_printf(char const *s , ...)
 	va_end(print);
 	return (size);
 }
-/*
+
 int	main(void) {
-	long n = -2147483647;
+	int n = -2147483647;
 	ft_printf("%p", n);
 	return (0);
-}*/
+}
